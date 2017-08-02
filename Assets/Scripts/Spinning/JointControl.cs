@@ -47,7 +47,6 @@ public class JointControl : MonoBehaviour {
         transform.Rotate(frequency * 360 * Time.fixedDeltaTime * SpinMaster.instance.speed);
 	}
 
-    [OSCMethod("setRotation")]
     public void setRotation(Vector3 newRotation)
     {
         transform.localRotation = Quaternion.Euler(newRotation*360);

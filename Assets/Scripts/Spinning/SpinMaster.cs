@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 [Serializable]
 public struct JointData
@@ -60,6 +61,8 @@ public class SpinMaster : MonoBehaviour {
     public RectTransform blockContainer;
     public GameObject blockUIPrefab;
     public BlockEditorUI editor;
+
+	public RectTransform timelineEditor;
 
     //public int patternIndex;
 
@@ -259,5 +262,18 @@ public class SpinMaster : MonoBehaviour {
     {
         isPlaying = !isPlaying;
     }
+
+	public void updateStartOffsetFromUI()
+	{
+		for (int i = 0; i < 3; i++) 
+		{
+			float tx = 0, ty = 0, tz = 0;
+			float.TryParse (timelineEditor.Find ("F" + i + "X").GetComponent<InputField> ().text, out tx);
+			float.TryParse (timelineEditor.Find ("F" + i + "Y").GetComponent<InputField> ().text, out ty);
+			float.TryParse (timelineEditor.Find ("F" + i + "Z").GetComponent<InputField> ().text, out tz);
+
+			startOffset [i] = new Vector3 (tx, ty, tz);
+		}
+	}
 }
 
