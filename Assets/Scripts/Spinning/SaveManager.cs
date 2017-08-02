@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -24,6 +25,7 @@ public class SaveManager : MonoBehaviour
 {
 
     public SpinMaster[] spinMasters;
+	public InputField fileNameInput;
 
     // Use this for initialization
     void Start()
@@ -34,8 +36,6 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) save();
-        if (Input.GetKeyDown(KeyCode.L)) load();
     }
 
     public void save()
@@ -57,12 +57,17 @@ public class SaveManager : MonoBehaviour
                 "",
                 "sequence.spin",
                 "spin");
+#else
+		string dir =  Directory.GetCurrentDirectory()+"/sequences"; 
+		if(!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+		string path = dir+"/"+fileNameInput.text+".spin";
+#endif
 
         if (path.Length != 0)
         {
             File.WriteAllText(path, s);
         }
-#endif
+
 
     }
 
@@ -73,7 +78,11 @@ public class SaveManager : MonoBehaviour
                 "Open sequence",
                 "",
                 "spin");
-
+#else
+		string dir =  Directory.GetCurrentDirectory()+"/sequences"; 
+		if(!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+		string path = dir+"/"+fileNameInput.text+".spin";
+#endif
         if (path.Length != 0)
         {
             string data = File.ReadAllText(path);
@@ -86,6 +95,5 @@ public class SaveManager : MonoBehaviour
                 spinMasters[i].updateUI();
             }
         }
-#endif
     }
 }
