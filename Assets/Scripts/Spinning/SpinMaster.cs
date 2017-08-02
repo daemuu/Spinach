@@ -221,7 +221,7 @@ public class SpinMaster : MonoBehaviour {
 
         for(int i=0;i<3;i++)
         {
-            p.frequencies[i] = emptyData?((i == 2)?Vector3.forward:Vector3.zero):new Vector3(float.Parse(dSplit[2+i*3]), float.Parse(dSplit[2+i*3+1]), float.Parse(dSplit[2+i*3+2]));
+            p.frequencies[i] = emptyData?((i == 2)?Vector3.right:Vector3.zero):new Vector3(float.Parse(dSplit[2+i*3]), float.Parse(dSplit[2+i*3+1]), float.Parse(dSplit[2+i*3+2]));
         }
 
         patterns.Add(p);
